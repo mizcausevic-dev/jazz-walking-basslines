@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jazz Walking Basslines</title>
+  <style>
+    :root {
+      --ink: #16120e;
+      --ivory: #f3efe4;
+      --brass: #b08d57;
+      --ox: #7a2e2a;
+      --muted: #b7ab9a;
+      --line: rgba(243, 239, 228, .16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--ivory);
+      font-family: Georgia, "Iowan Old Style", Palatino, serif;
+      line-height: 1.45;
+      padding-bottom: 84px;
+    }
+    a { color: var(--brass); }
+    button, .transport, .meta, .sign, .step, .shell { font-family: ui-monospace, Menlo, Consolas, monospace; }
+    .top {
+      position: sticky; top: 0; z-index: 5;
+      display: flex; justify-content: space-between; gap: 16px; align-items: center;
+      padding: 12px 22px;
+      background: rgba(22, 18, 14, .92);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { letter-spacing: .14em; text-transform: uppercase; font-size: .72rem; }
+    .top nav { display: flex; gap: 14px; font-size: .78rem; }
+    main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+    .stage {
+      display: grid;
+      grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+      gap: 28px;
+      align-items: start;
+      padding: 28px 0 8px;
+    }
+    .stage > div { min-width: 0; }
+    h1 { font-weight: 500; font-size: clamp(2.6rem, 6vw, 5rem); line-height: .9; margin: 8px 0 12px; }
+    .kicker { letter-spacing: .16em; text-transform: uppercase; color: var(--brass); font-size: .75rem; margin: 0; }
+    .lede { font-size: 1.12rem; }
+    .meta, .note { color: var(--muted); font-size: .84rem; }
+    .hero { margin: 0 0 18px; }
+    .hero img { display: block; width: 100%; height: auto; }
+    .rail { display: flex; gap: 8px; overflow-x: auto; max-width: 100%; padding: 4px 0 12px; }
+    .rail button, .switch button, .transport button {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ivory);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .rail button[aria-pressed="true"], .switch button[aria-pressed="true"], .transport button[aria-pressed="true"] {
+      background: var(--brass);
+      color: var(--ink);
+      border-color: var(--brass);
+    }
+    .switch { display: flex; gap: 8px; align-items: center; margin: 0 0 10px; }
+    .scroller { overflow-x: auto; max-width: 100%; background: var(--ivory); color: var(--ink); border-radius: 18px; }
+    .signs { position: relative; height: 36px; }
+    .sign {
+      position: absolute; top: 8px; height: 22px;
+      border-left: 2px solid var(--ox);
+      padding-left: 6px;
+      font-size: 11px;
+      letter-spacing: .04em;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .lane { position: relative; height: 230px; }
+    .step {
+      position: absolute; width: 34px; height: 22px; margin-left: -17px;
+      border: 0; border-radius: 999px;
+      background: var(--brass); color: var(--ink);
+      font-size: 10px; cursor: default;
+    }
+    .step.change { background: var(--ox); color: var(--ivory); }
+    .step.now { outline: 2px solid var(--ink); }
+    .shells { position: relative; height: 28px; display: none; }
+    .shells.on { display: block; }
+    .shell {
+      position: absolute; top: 2px;
+      font-size: 10px; color: var(--ox);
+    }
+    .path { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .status { min-height: 1.2em; }
+    .table-scroll { overflow-x: auto; max-width: 100%; }
+    .files { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    .files th, .files td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+    .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: .82rem; }
+    .flow span { border: 1px solid var(--line); border-radius: 999px; padding: 4px 8px; }
+    audio, video { display: block; width: 100%; height: auto; margin: 10px 0 16px; background: #000; }
+    .transport {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 6;
+      display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+      padding: 10px 16px;
+      background: #0e0c0a;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 860px) {
+      .stage { grid-template-columns: 1fr; }
+      .top nav { display: none; }
+      h1 { font-size: 2.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">Jazz Walking Basslines</a>
+    <nav>
+      <a href="#walk">Walk</a>
+      <a href="#files">Files</a>
+      <a href="#reading">Recorded reading</a>
+      <a href="media.html">Stills</a>
+      <a href="midi/arrangement.mid">Arrangement</a>
+    </nav>
+  </header>
+  <main>
+    <section class="stage">
+      <div>
+        <p class="kicker">Eight studies · quarter notes over explicit changes</p>
+        <h1 id="title">Stroll</h1>
+        <p class="lede" id="identity"></p>
+        <p class="meta" id="facts"></p>
+        <p id="rhythm"></p>
+        <p id="voicing"></p>
+        <p class="note" id="limits"></p>
+        <p class="note" id="departures"></p>
+      </div>
+      <div id="walk">
+        <figure class="hero">
+          <img src="art/hero.jpg" width="1280" height="720" alt="Illustration of a walking path of steps across an ivory lane. Not a photograph of a studio or of performers.">
+        </figure>
+        <div class="rail" id="rail" role="tablist" aria-label="Studies"></div>
+        <div class="switch" role="group" aria-label="Variation">
+          <button type="button" id="var-a" aria-pressed="true">Variation A</button>
+          <button type="button" id="var-b" aria-pressed="false">Variation B</button>
+        </div>
+        <div class="scroller" id="scroller">
+          <div class="signs" id="signs"></div>
+          <div class="lane" id="lane">
+            <svg class="path" id="path" aria-hidden="true"></svg>
+            <div id="steps"></div>
+          </div>
+          <div class="shells" id="shells"></div>
+        </div>
+        <p class="status" id="status" role="status">Reading the MIDI.</p>
+      </div>
+    </section>
+    <p>Walking bass is monophonic, MIDI 28 to 55 (E1 to G3), standard four-string tuning EADG. Chord references are separate shells from MIDI 48 to 76 and are not part of the core count.</p>
+    <div class="flow" aria-label="File contract">
+      <span>Canonical score</span><span>MIDI bytes</span><span>Reopened validation</span><span>MP3 preview</span><span>Film and captions</span>
+    </div>
+    <p class="note">Stills lead to the social drafts. The catalog leads to this page. <a href="articles/medium-draft-Cursor.md">Article draft</a> · <a href="articles/medium-paste-Cursor.txt">plain text</a></p>
+    <p>Use either the combined arrangement or the separate parts. Do not stack the part files on top of the combined file.</p>
+    <h2 id="files">Files</h2>
+    <p class="meta">Validation PASS. Core 16. Chord references 8. <a href="midi/validation-Cursor.json">validation report</a> · <a href="catalog/catalog-Cursor.json">catalog</a></p>
+    <div class="table-scroll">
+    <table class="files">
+      <thead><tr><th>Part</th><th>Role</th><th>Var</th><th>Count</th><th>BPM</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><a href="midi/s01-stroll/walk-a.mid">s01.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>108</td><td>32</td></tr><tr><td><a href="midi/s01-stroll/walk-b.mid">s01.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>108</td><td>32</td></tr><tr><td><a href="midi/s01-stroll/chords.mid">s01.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>108</td><td>16</td></tr><tr><td><a href="midi/s02-chorus/walk-a.mid">s02.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>124</td><td>64</td></tr><tr><td><a href="midi/s02-chorus/walk-b.mid">s02.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>124</td><td>64</td></tr><tr><td><a href="midi/s02-chorus/chords.mid">s02.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>124</td><td>16</td></tr><tr><td><a href="midi/s03-drop/walk-a.mid">s03.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>132</td><td>24</td></tr><tr><td><a href="midi/s03-drop/walk-b.mid">s03.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>132</td><td>32</td></tr><tr><td><a href="midi/s03-drop/chords.mid">s03.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>132</td><td>8</td></tr><tr><td><a href="midi/s04-two-feel/walk-a.mid">s04.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>96</td><td>16</td></tr><tr><td><a href="midi/s04-two-feel/walk-b.mid">s04.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>96</td><td>32</td></tr><tr><td><a href="midi/s04-two-feel/chords.mid">s04.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>96</td><td>8</td></tr><tr><td><a href="midi/s05-pickup/walk-a.mid">s05.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>140</td><td>63</td></tr><tr><td><a href="midi/s05-pickup/walk-b.mid">s05.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>140</td><td>64</td></tr><tr><td><a href="midi/s05-pickup/chords.mid">s05.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>140</td><td>32</td></tr><tr><td><a href="midi/s06-push/walk-a.mid">s06.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>116</td><td>35</td></tr><tr><td><a href="midi/s06-push/walk-b.mid">s06.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>116</td><td>32</td></tr><tr><td><a href="midi/s06-push/chords.mid">s06.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>116</td><td>8</td></tr><tr><td><a href="midi/s07-cadence/walk-a.mid">s07.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>100</td><td>24</td></tr><tr><td><a href="midi/s07-cadence/walk-b.mid">s07.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>100</td><td>32</td></tr><tr><td><a href="midi/s07-cadence/chords.mid">s07.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>100</td><td>10</td></tr><tr><td><a href="midi/s08-breather/walk-a.mid">s08.walk.a</a></td><td>walking-bass</td><td>a</td><td>core</td><td>148</td><td>61</td></tr><tr><td><a href="midi/s08-breather/walk-b.mid">s08.walk.b</a></td><td>walking-bass</td><td>b</td><td>core</td><td>148</td><td>64</td></tr><tr><td><a href="midi/s08-breather/chords.mid">s08.chords</a></td><td>chord-reference</td><td>ref</td><td>chord reference</td><td>148</td><td>16</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <section id="reading">
+      <p class="kicker">Recorded reading · study 01 variation A only</p>
+      <p>This MP3 is 17.78 seconds. preview, not a master. The film is 17.78 seconds and shows preview, not master.</p>
+      <audio controls preload="metadata" src="preview/preview.mp3"></audio>
+      <p><a href="preview/preview.mp3">preview/preview.mp3</a></p>
+      <video controls preload="metadata" poster="film/poster.jpg" width="1280" height="720">
+        <source src="film/preview.mp4" type="video/mp4">
+        <track kind="captions" src="film/preview.vtt" srclang="en" label="English" default>
+      </video>
+      <p><a href="film/preview.mp4">film/preview.mp4</a> · <a href="film/preview.vtt">film/preview.vtt</a></p>
+    </section>
+    <p>No program changes are encoded. A conventional GM player will normally use its default piano program for pitched channels unless configured otherwise; compatible GM channel 10 percussion is treated separately. Player behavior may vary.</p>
+    <p>No human listening audition was performed for this build.</p>
+    <p>The GitHub repository is https://github.com/mizcausevic-dev/jazz-walking-basslines and it is public. The catalog page is https://mizcausevic-dev.github.io/jazz-walking-basslines/ .</p>
+  </main>
+  <div class="transport">
+    <button type="button" id="play">Play walk</button>
+    <button type="button" id="shell-toggle" aria-pressed="false">Chord pitches</button>
+    <span id="transport-label">Space plays. J and K change study.</span>
+  </div>
+  <script id="pack" type="application/json">{"studies": [{"id": "s01", "spell": ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"], "title": "Stroll", "bpm": 108, "bars": 8, "collection": "Bb major", "tonic": "Bb", "identity": "Quarter notes for eight bars. Beat 1 is a root on Bb, Eb, Dm, G, Cm, and F, then the last two bars move to a third and a fifth. Variation B starts each bar on a third or fifth instead.", "limitations": "Both bass variations walk this one chord reference. They are alternatives. Beat 4 of bar 3 is B, the third of G7, and it is flagged.", "voicing": "Bass range E1 to G3. The chord reference is a third and a seventh, held for the bar. Roots are not doubled into the chord file.", "departures": ["F# and B leave Bb major. They are the chromatic approach into G and the third of G7."], "harmonic_rhythm": "One chord per bar: Bbmaj7, Ebmaj7, Dm7, G7, Cm7, F7, Bbmaj7, F7.", "changes": ["Bbmaj7", "Ebmaj7", "Dm7", "G7", "Cm7", "F7", "Bbmaj7", "F7"], "change_bars": [1, 1, 1, 1, 1, 1, 1, 1], "tempo_us": 555556}, {"id": "s02", "spell": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "Bb", "B"], "title": "Chorus", "bpm": 124, "bars": 16, "collection": "F major", "tonic": "F", "identity": "A 16-bar chorus of quarter notes. Variation A aims at roots on the downbeats. Variation B aims at sevenths and turns the bar around.", "limitations": "The chord reference holds each shell for two bars. Use it with either bass variation, not with both at once.", "voicing": "Shells are the third and seventh. The bass walks inside E1 to G3.", "departures": ["B, F#, and C# leave F major. B is the third of G7. F# is the third of D7 and one approach. C# approaches D."], "harmonic_rhythm": "Two bars per chord: Dm7, G7, Gm7, C7, Am7, D7, Gm7, C7.", "changes": ["Dm7", "G7", "Gm7", "C7", "Am7", "D7", "Gm7", "C7"], "change_bars": [2, 2, 2, 2, 2, 2, 2, 2], "tempo_us": 483871}, {"id": "s03", "spell": ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"], "title": "Drop", "bpm": 132, "bars": 8, "collection": "G natural minor", "tonic": "G", "identity": "The walk stops on beat 4, so the chord change has air. Variation B fills those beats and keeps moving.", "limitations": "The rest is written as silence, not as a tied note. The chord reference still holds through beat 4.", "voicing": "Two-note shells. Bass notes are quarters on beats 1, 2, and 3 in variation A.", "departures": ["F# leaves G natural minor. It is the third of D7."], "harmonic_rhythm": "Two bars per chord: Gm7, Cm7, D7, Gm7. Variation A rests on beat 4 of every bar.", "changes": ["Gm7", "Cm7", "D7", "Gm7"], "change_bars": [2, 2, 2, 2], "tempo_us": 454545}, {"id": "s04", "spell": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], "title": "Two Feel", "bpm": 96, "bars": 8, "collection": "C major", "tonic": "C", "identity": "Half notes only: root then fifth, or third then root. Variation B breaks the same changes into quarter notes.", "limitations": "Variation A is a two-feel, not a missing walk. Nothing in this study leaves C major, so nothing is flagged.", "voicing": "Half-note bass against shells held for two bars.", "departures": [], "harmonic_rhythm": "Two bars per chord: Cmaj7, Am7, Dm7, G7.", "changes": ["Cmaj7", "Am7", "Dm7", "G7"], "change_bars": [2, 2, 2, 2], "tempo_us": 625000}, {"id": "s05", "spell": ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"], "title": "Pickup", "bpm": 140, "bars": 16, "collection": "Eb major", "tonic": "Eb", "identity": "Variation A leaves beat 1 empty and enters on beat 2. Variation B plays the downbeat and aims at thirds.", "limitations": "The first downbeat of variation A is silent on purpose. The chord reference still sounds there.", "voicing": "Shells last one bar. The bass pickup is inside the file, not a negative start.", "departures": ["A leaves Eb major as the third of F7. E leaves Eb major as the third of C7."], "harmonic_rhythm": "One chord per bar across 16 bars: Ebmaj7, Fm7, Gm7, Abmaj7, Bb7, Ebmaj7, Cm7, F7, Bb7, Ebmaj7, Abmaj7, Ebmaj7, Fm7, Bb7, Ebmaj7, C7.", "changes": ["Ebmaj7", "Fm7", "Gm7", "Abmaj7", "Bb7", "Ebmaj7", "Cm7", "F7", "Bb7", "Ebmaj7", "Abmaj7", "Ebmaj7", "Fm7", "Bb7", "Ebmaj7", "C7"], "change_bars": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "tempo_us": 428571}, {"id": "s06", "spell": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "Bb", "B"], "title": "Push", "bpm": 116, "bars": 8, "collection": "D Dorian", "tonic": "D", "identity": "Quarter notes, with the next downbeat pushed onto the last eighth of the previous bar. Variation B waits for the downbeat and aims at sevenths.", "limitations": "The pushed note is the same pitch as the following downbeat. They meet at the barline and do not overlap.", "voicing": "The anticipation is an eighth note in the bass file. The chord reference still changes on the downbeat.", "departures": ["Bb leaves D Dorian as the fifth of Em7b5. C# leaves D Dorian as the third of A7."], "harmonic_rhythm": "Two bars per chord: Dm7, G7, Em7b5, A7. Variation A arrives an eighth early at each change.", "changes": ["Dm7", "G7", "Em7b5", "A7"], "change_bars": [2, 2, 2, 2], "tempo_us": 517241}, {"id": "s07", "spell": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"], "title": "Cadence", "bpm": 100, "bars": 8, "collection": "A major", "tonic": "A", "identity": "Four bars of quarters, then a half-note pedal on A. Variation B keeps walking and ends on a flagged G.", "limitations": "The four-bar pedal is the cadence. The chord reference holds Amaj7 shells under it.", "voicing": "Half notes in the pedal are root then fifth or third. The last chord shell lasts four bars.", "departures": ["Variation B ends on G2, a step below A. That G is flagged. Variation A stays inside A major."], "harmonic_rhythm": "One bar each of Amaj7, Dmaj7, Bm7, E7, then four bars of A.", "changes": ["Amaj7", "Dmaj7", "Bm7", "E7", "A"], "change_bars": [1, 1, 1, 1, 4], "tempo_us": 600000}, {"id": "s08", "spell": ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"], "title": "Breather", "bpm": 148, "bars": 16, "collection": "C natural minor", "tonic": "C", "identity": "A 16-bar walk with three downbeat breaths. Variation B plays those downbeats as the third of the chord.", "limitations": "The breaths are rests, not ties. Bars are numbered from 1 in the description and from 0 in the file.", "voicing": "Shells last two bars. The B on G7 is flagged in both the bass and the chord reference.", "departures": ["B leaves C natural minor. It is the third of G7."], "harmonic_rhythm": "Two bars per chord: Cm7, Fm7, G7, Cm7, Abmaj7, Bb7, Gm7, G7. Variation A rests on beat 1 of bars 4, 8, and 12.", "changes": ["Cm7", "Fm7", "G7", "Cm7", "Abmaj7", "Bb7", "Gm7", "G7"], "change_bars": [2, 2, 2, 2, 2, 2, 2, 2], "tempo_us": 405405}], "parts": [{"id": "s01.walk.a", "study_id": "s01", "role": "walking-bass", "variation": "a", "path": "midi/s01-stroll/walk-a.mid"}, {"id": "s01.walk.b", "study_id": "s01", "role": "walking-bass", "variation": "b", "path": "midi/s01-stroll/walk-b.mid"}, {"id": "s01.chords", "study_id": "s01", "role": "chord-reference", "variation": "ref", "path": "midi/s01-stroll/chords.mid"}, {"id": "s02.walk.a", "study_id": "s02", "role": "walking-bass", "variation": "a", "path": "midi/s02-chorus/walk-a.mid"}, {"id": "s02.walk.b", "study_id": "s02", "role": "walking-bass", "variation": "b", "path": "midi/s02-chorus/walk-b.mid"}, {"id": "s02.chords", "study_id": "s02", "role": "chord-reference", "variation": "ref", "path": "midi/s02-chorus/chords.mid"}, {"id": "s03.walk.a", "study_id": "s03", "role": "walking-bass", "variation": "a", "path": "midi/s03-drop/walk-a.mid"}, {"id": "s03.walk.b", "study_id": "s03", "role": "walking-bass", "variation": "b", "path": "midi/s03-drop/walk-b.mid"}, {"id": "s03.chords", "study_id": "s03", "role": "chord-reference", "variation": "ref", "path": "midi/s03-drop/chords.mid"}, {"id": "s04.walk.a", "study_id": "s04", "role": "walking-bass", "variation": "a", "path": "midi/s04-two-feel/walk-a.mid"}, {"id": "s04.walk.b", "study_id": "s04", "role": "walking-bass", "variation": "b", "path": "midi/s04-two-feel/walk-b.mid"}, {"id": "s04.chords", "study_id": "s04", "role": "chord-reference", "variation": "ref", "path": "midi/s04-two-feel/chords.mid"}, {"id": "s05.walk.a", "study_id": "s05", "role": "walking-bass", "variation": "a", "path": "midi/s05-pickup/walk-a.mid"}, {"id": "s05.walk.b", "study_id": "s05", "role": "walking-bass", "variation": "b", "path": "midi/s05-pickup/walk-b.mid"}, {"id": "s05.chords", "study_id": "s05", "role": "chord-reference", "variation": "ref", "path": "midi/s05-pickup/chords.mid"}, {"id": "s06.walk.a", "study_id": "s06", "role": "walking-bass", "variation": "a", "path": "midi/s06-push/walk-a.mid"}, {"id": "s06.walk.b", "study_id": "s06", "role": "walking-bass", "variation": "b", "path": "midi/s06-push/walk-b.mid"}, {"id": "s06.chords", "study_id": "s06", "role": "chord-reference", "variation": "ref", "path": "midi/s06-push/chords.mid"}, {"id": "s07.walk.a", "study_id": "s07", "role": "walking-bass", "variation": "a", "path": "midi/s07-cadence/walk-a.mid"}, {"id": "s07.walk.b", "study_id": "s07", "role": "walking-bass", "variation": "b", "path": "midi/s07-cadence/walk-b.mid"}, {"id": "s07.chords", "study_id": "s07", "role": "chord-reference", "variation": "ref", "path": "midi/s07-cadence/chords.mid"}, {"id": "s08.walk.a", "study_id": "s08", "role": "walking-bass", "variation": "a", "path": "midi/s08-breather/walk-a.mid"}, {"id": "s08.walk.b", "study_id": "s08", "role": "walking-bass", "variation": "b", "path": "midi/s08-breather/walk-b.mid"}, {"id": "s08.chords", "study_id": "s08", "role": "chord-reference", "variation": "ref", "path": "midi/s08-breather/chords.mid"}]}</script>
+  <script>
+    const pack = JSON.parse(document.getElementById("pack").textContent);
+    const NAMES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+    const rail = document.getElementById("rail");
+    const signs = document.getElementById("signs");
+    const lane = document.getElementById("lane");
+    const steps = document.getElementById("steps");
+    const shells = document.getElementById("shells");
+    const path = document.getElementById("path");
+    const status = document.getElementById("status");
+    let studyId = "s01";
+    let variation = "a";
+    let walkNotes = [];
+    let shellNotes = [];
+    let showShells = false;
+    let audio = null;
+    let playing = false;
+    let followId = 0;
+
+    function pitchName(pitch) {
+      return study().spell[pitch % 12] + (Math.floor(pitch / 12) - 1);
+    }
+
+    function readVlq(view, offset) {
+      let value = 0;
+      let byte = 0;
+      do {
+        byte = view.getUint8(offset);
+        offset += 1;
+        value = (value << 7) | (byte & 0x7f);
+      } while (byte & 0x80);
+      return [value, offset];
+    }
+
+    function parseMidi(buffer) {
+      const view = new DataView(buffer);
+      const head = String.fromCharCode(view.getUint8(0), view.getUint8(1), view.getUint8(2), view.getUint8(3));
+      if (head !== "MThd" || view.getUint16(12) !== 960) throw new Error("unexpected MIDI header");
+      const tracks = view.getUint16(10);
+      let offset = 14;
+      const notes = [];
+      for (let track = 0; track < tracks; track += 1) {
+        const mark = String.fromCharCode(view.getUint8(offset), view.getUint8(offset + 1), view.getUint8(offset + 2), view.getUint8(offset + 3));
+        if (mark !== "MTrk") throw new Error("missing track");
+        const length = view.getUint32(offset + 4);
+        offset += 8;
+        const end = offset + length;
+        let tick = 0;
+        let running = 0;
+        const open = new Map();
+        while (offset < end) {
+          let delta;
+          [delta, offset] = readVlq(view, offset);
+          tick += delta;
+          let byte = view.getUint8(offset);
+          if (byte < 0x80) {
+            if (!running) throw new Error("running status");
+          } else {
+            running = byte;
+            offset += 1;
+          }
+          if (running === 0xff) {
+            offset += 1;
+            let metaLen;
+            [metaLen, offset] = readVlq(view, offset);
+            offset += metaLen;
+            continue;
+          }
+          if (running === 0xf0 || running === 0xf7) {
+            let sysLen;
+            [sysLen, offset] = readVlq(view, offset);
+            offset += sysLen;
+            continue;
+          }
+          const kind = running & 0xf0;
+          const channel = running & 0x0f;
+          const data1 = byte < 0x80 ? byte : view.getUint8(offset);
+          if (byte >= 0x80) offset += 1;
+          let data2 = 0;
+          if (kind !== 0xc0 && kind !== 0xd0) {
+            data2 = view.getUint8(offset);
+            offset += 1;
+          }
+          const key = channel + ":" + data1;
+          if (kind === 0x90 && data2 > 0) open.set(key, tick);
+          else if (kind === 0x80 || (kind === 0x90 && data2 === 0)) {
+            const start = open.get(key);
+            if (start !== undefined) {
+              notes.push({ pitch: data1, start: start, duration: tick - start, channel: channel });
+              open.delete(key);
+            }
+          }
+        }
+      }
+      notes.sort((a, b) => a.start - b.start || a.pitch - b.pitch);
+      return notes;
+    }
+
+    function partPath(role) {
+      const found = pack.parts.find((part) => part.study_id === studyId && part.role === role && (role === "chord-reference" || part.variation === variation));
+      if (!found) throw new Error("missing " + role);
+      return found.path;
+    }
+
+    function study() {
+      return pack.studies.find((item) => item.id === studyId);
+    }
+
+    function renderCopy() {
+      const item = study();
+      document.getElementById("title").textContent = item.title;
+      document.getElementById("identity").textContent = item.identity;
+      document.getElementById("facts").textContent = item.id + " · " + item.bpm + " BPM · " + item.bars + " bars · " + item.collection + " · tonic " + item.tonic;
+      document.getElementById("rhythm").textContent = item.harmonic_rhythm;
+      document.getElementById("voicing").textContent = item.voicing;
+      document.getElementById("limits").textContent = item.limitations;
+      document.getElementById("departures").textContent = item.departures.length ? item.departures.join(" ") : "No pitch in this study is flagged as a departure.";
+      document.getElementById("transport-label").textContent = item.title + " " + variation.toUpperCase() + " · Space plays · J and K change study";
+      for (const button of rail.querySelectorAll("button")) {
+        button.setAttribute("aria-pressed", button.dataset.id === studyId ? "true" : "false");
+      }
+      document.getElementById("var-a").setAttribute("aria-pressed", variation === "a" ? "true" : "false");
+      document.getElementById("var-b").setAttribute("aria-pressed", variation === "b" ? "true" : "false");
+    }
+
+    function changeTicks(item) {
+      const ticks = new Set();
+      let bar = 0;
+      item.change_bars.forEach((span) => {
+        ticks.add(bar * 4 * 960);
+        bar += span;
+      });
+      return ticks;
+    }
+
+    function draw() {
+      const item = study();
+      const container = item.bars * 4 * 960;
+      const width = Math.max(640, item.bars * 156);
+      signs.style.width = width + "px";
+      lane.style.width = width + "px";
+      shells.style.width = width + "px";
+      signs.innerHTML = "";
+      steps.innerHTML = "";
+      shells.innerHTML = "";
+      path.innerHTML = "";
+      let bar = 0;
+      item.changes.forEach((name, index) => {
+        const span = item.change_bars[index];
+        const sign = document.createElement("div");
+        sign.className = "sign";
+        sign.textContent = name;
+        sign.style.left = (bar / item.bars) * width + "px";
+        sign.style.width = (span / item.bars) * width + "px";
+        signs.appendChild(sign);
+        bar += span;
+      });
+      if (!walkNotes.length) {
+        status.textContent = "This variation has no bass notes.";
+        return;
+      }
+      const low = Math.min(...walkNotes.map((note) => note.pitch));
+      const high = Math.max(...walkNotes.map((note) => note.pitch));
+      const span = Math.max(1, high - low);
+      const changes = changeTicks(item);
+      const points = [];
+      walkNotes.forEach((note) => {
+        const step = document.createElement("div");
+        step.className = "step" + (changes.has(note.start) ? " change" : "");
+        step.textContent = pitchName(note.pitch);
+        step.dataset.start = String(note.start);
+        step.dataset.end = String(note.start + note.duration);
+        const x = (note.start / container) * width;
+        const y = 16 + (1 - (note.pitch - low) / span) * 180;
+        step.style.left = x + "px";
+        step.style.top = y + "px";
+        steps.appendChild(step);
+        points.push([x, y + 11]);
+      });
+      path.setAttribute("viewBox", "0 0 " + width + " 230");
+      path.setAttribute("width", String(width));
+      path.setAttribute("height", "230");
+      for (let index = 0; index < points.length - 1; index += 1) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", String(points[index][0]));
+        line.setAttribute("y1", String(points[index][1]));
+        line.setAttribute("x2", String(points[index + 1][0]));
+        line.setAttribute("y2", String(points[index + 1][1]));
+        line.setAttribute("stroke", "#7a5a32");
+        line.setAttribute("stroke-width", "1.2");
+        path.appendChild(line);
+      }
+      shells.classList.toggle("on", showShells);
+      if (showShells) {
+        shellNotes.forEach((note) => {
+          const mark = document.createElement("div");
+          mark.className = "shell";
+          mark.textContent = pitchName(note.pitch);
+          mark.style.left = (note.start / container) * width + "px";
+          shells.appendChild(mark);
+        });
+      }
+    }
+
+    async function loadStudy() {
+      stopPlayback();
+      renderCopy();
+      status.textContent = "Reading the MIDI.";
+      try {
+        const walkRes = await fetch(partPath("walking-bass"));
+        const shellRes = await fetch(partPath("chord-reference"));
+        if (!walkRes.ok || !shellRes.ok) throw new Error("MIDI request failed");
+        walkNotes = parseMidi(await walkRes.arrayBuffer());
+        shellNotes = parseMidi(await shellRes.arrayBuffer());
+        status.textContent = walkNotes.length + " bass notes. Chord names stay above the walk.";
+        draw();
+      } catch (error) {
+        walkNotes = [];
+        shellNotes = [];
+        status.textContent = "The MIDI did not load. " + error.message;
+      }
+    }
+
+    function freq(pitch) {
+      return 440 * Math.pow(2, (pitch - 69) / 12);
+    }
+
+    function schedule(ctx, pitch, when, duration, amount, type) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq(pitch);
+      const attack = Math.min(0.012, duration * 0.2);
+      const end = when + duration;
+      gain.gain.setValueAtTime(0.0001, when);
+      gain.gain.exponentialRampToValueAtTime(amount, when + attack);
+      gain.gain.exponentialRampToValueAtTime(0.0001, Math.max(end, when + attack + 0.01));
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(when);
+      osc.stop(end + 0.02);
+    }
+
+    function stopPlayback() {
+      playing = false;
+      cancelAnimationFrame(followId);
+      if (audio) {
+        audio.close();
+        audio = null;
+      }
+      document.getElementById("play").textContent = "Play walk";
+      document.querySelectorAll(".step.now").forEach((step) => step.classList.remove("now"));
+    }
+
+    function playWalk() {
+      if (!walkNotes.length) return;
+      stopPlayback();
+      const ctx = new AudioContext();
+      audio = ctx;
+      playing = true;
+      document.getElementById("play").textContent = "Stop";
+      const item = study();
+      const seconds = (tick) => tick / 960 * item.tempo_us / 1000000;
+      const origin = ctx.currentTime + 0.05;
+      for (const note of walkNotes) {
+        schedule(ctx, note.pitch, origin + seconds(note.start), Math.max(0.05, seconds(note.duration)), 0.16, "sine");
+      }
+      if (showShells) {
+        for (const note of shellNotes) {
+          schedule(ctx, note.pitch, origin + seconds(note.start), Math.max(0.05, seconds(note.duration)), 0.03, "triangle");
+        }
+      }
+      const container = seconds(item.bars * 4 * 960);
+      const follow = () => {
+        if (!playing || !audio) return;
+        const tick = (audio.currentTime - origin) * 1000000 / item.tempo_us * 960;
+        document.querySelectorAll(".step").forEach((step) => {
+          const start = Number(step.dataset.start);
+          const end = Number(step.dataset.end);
+          step.classList.toggle("now", tick >= start && tick < end);
+        });
+        if (audio.currentTime - origin < container) followId = requestAnimationFrame(follow);
+        else stopPlayback();
+      };
+      follow();
+    }
+
+    function togglePlay() {
+      if (playing) stopPlayback();
+      else playWalk();
+    }
+
+    function stepStudy(direction) {
+      const index = pack.studies.findIndex((item) => item.id === studyId);
+      studyId = pack.studies[(index + direction + pack.studies.length) % pack.studies.length].id;
+      loadStudy();
+    }
+
+    pack.studies.forEach((item) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.id = item.id;
+      button.textContent = item.id.slice(1) + " " + item.title;
+      button.addEventListener("click", () => {
+        studyId = item.id;
+        loadStudy();
+      });
+      rail.appendChild(button);
+    });
+    document.getElementById("var-a").addEventListener("click", () => { variation = "a"; loadStudy(); });
+    document.getElementById("var-b").addEventListener("click", () => { variation = "b"; loadStudy(); });
+    document.getElementById("play").addEventListener("click", togglePlay);
+    document.getElementById("shell-toggle").addEventListener("click", () => {
+      showShells = !showShells;
+      document.getElementById("shell-toggle").setAttribute("aria-pressed", showShells ? "true" : "false");
+      if (walkNotes.length) draw();
+    });
+    window.addEventListener("keydown", (event) => {
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (event.code === "Space") {
+        event.preventDefault();
+        togglePlay();
+      } else if (event.key === "j" || event.key === "J") stepStudy(-1);
+      else if (event.key === "k" || event.key === "K") stepStudy(1);
+    });
+    loadStudy();
+  </script>
+</body>
+</html>

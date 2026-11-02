@@ -1,0 +1,61 @@
+preview, not a master
+{
+  "arrangement_path": "midi/arrangement.mid",
+  "arrangement_sha256": "1737d311112c08423a93897f094d4986bf774270c9c2fa723bf8c9ed20be8c47",
+  "encode": "libmp3lame CBR 192 kbps, mono source",
+  "excerpt": {
+    "bars": "1-8, the full container",
+    "end_tick": 30720,
+    "sequencing": "walking bass variation A and the chord reference, for the full 8 bars",
+    "start_tick": 0,
+    "study": "s01",
+    "transposition": "none"
+  },
+  "intermediate_wav": "build/preview.wav",
+  "intermediate_wav_note": "The WAV is gitignored build storage. The delivered preview is the MP3.",
+  "intermediate_wav_sha256": "bcafd4cdb5aabae04c6f3adf6ada131b90c9a2708fb9cc2e1b9809ec2c025750",
+  "label": "preview, not a master",
+  "listening": "No human listening audition was performed for this build.",
+  "mapping": {
+    "chord-reference": "quiet triangle, soft attack, held for the written duration",
+    "walking-bass": "sine at the written pitch, short attack, held for the written duration"
+  },
+  "mp3_encode_command": [
+    "ffmpeg",
+    "-y",
+    "-i",
+    "/home/runner/work/jazz-walking-basslines/jazz-walking-basslines/build/preview.wav",
+    "-codec:a",
+    "libmp3lame",
+    "-b:a",
+    "192k",
+    "/home/runner/work/jazz-walking-basslines/jazz-walking-basslines/preview/preview.mp3"
+  ],
+  "mp3_path": "preview/preview.mp3",
+  "mp3_sha256": "2239828e94b83ad882ab8049f19e01f8c458cad9e8fd3054abf532a4468ab618",
+  "pack_id": "jazz-walking-basslines",
+  "program_changes": "No program changes are encoded. A conventional GM player will normally use its default piano program for pitched channels unless configured otherwise; compatible GM channel 10 percussion is treated separately. Player behavior may vary.",
+  "renderer": "simple-synth-1.0.0",
+  "renderer_note": "These voices are preview mappings. They are not encoded in the MIDI file.",
+  "rounding": "sample = floor(seconds * sample_rate + 0.5), computed from tick 0; intervals are not summed",
+  "sample_peak": 10353,
+  "sample_peak_dbfs": -10.007674418971373,
+  "sample_peak_note": "This is a sample peak of the integer mix after scaling. It is not a true-peak measurement and it is not LUFS.",
+  "score_seconds": 17.777792,
+  "score_sha256": "77044c83fe7afcdba20e34c609249e3a0f2f063ca5320ad3d0ffd2760c22f088",
+  "seconds_encoded": 17.7778,
+  "source_parts": [
+    {
+      "id": "s01.walk.a",
+      "path": "midi/s01-stroll/walk-a.mid",
+      "sha256": "c18b161ca47c6f4424d8040d11e730cbe8960c4e42af0c5e6083e8eb5b6855aa"
+    },
+    {
+      "id": "s01.chords",
+      "path": "midi/s01-stroll/chords.mid",
+      "sha256": "68dde5dc88890a2cfff8602cae8ca98a46ee4f59867eff91d40048e13e86abae"
+    }
+  ],
+  "tempo_authority": "encoded MIDI tempo",
+  "tempo_us": 555556
+}

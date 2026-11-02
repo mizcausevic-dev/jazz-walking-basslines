@@ -1,0 +1,829 @@
+{
+  "arrangement": {
+    "agreement": "PASS",
+    "bytes": 539,
+    "format": 1,
+    "path": "midi/arrangement.mid",
+    "ppq": 960,
+    "sha256": "1737d311112c08423a93897f094d4986bf774270c9c2fa723bf8c9ed20be8c47",
+    "tracks": 3
+  },
+  "catalog_path": "catalog/catalog-Cursor.json",
+  "catalog_sha256": "114cededf80cb069f1165e6e57c369269f91ec19276729d470871542955ef5fc",
+  "errors": [],
+  "files": [
+    {
+      "bytes": 345,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 32,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 555556
+      },
+      "core": true,
+      "departures": 2,
+      "effective_bpm": 107.99991360006912,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 32,
+      "outside_collection": 2,
+      "path": "midi/s01-stroll/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 108,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "c18b161ca47c6f4424d8040d11e730cbe8960c4e42af0c5e6083e8eb5b6855aa",
+      "tempo_us": 555556,
+      "tracks": 1
+    },
+    {
+      "bytes": 345,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 32,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 555556
+      },
+      "core": true,
+      "departures": 1,
+      "effective_bpm": 107.99991360006912,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 32,
+      "outside_collection": 1,
+      "path": "midi/s01-stroll/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 108,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "fbf35262ad19269b5e248b593aee4a8341491b3eaa77ea0909f46d40d3c58371",
+      "tempo_us": 555556,
+      "tracks": 1
+    },
+    {
+      "bytes": 196,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 16,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 555556
+      },
+      "core": false,
+      "departures": 1,
+      "effective_bpm": 107.99991360006912,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 16,
+      "outside_collection": 1,
+      "path": "midi/s01-stroll/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 108,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "68dde5dc88890a2cfff8602cae8ca98a46ee4f59867eff91d40048e13e86abae",
+      "tempo_us": 555556,
+      "tracks": 1
+    },
+    {
+      "bytes": 633,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 64,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 483871
+      },
+      "core": true,
+      "departures": 7,
+      "effective_bpm": 123.99999173333389,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 64,
+      "outside_collection": 7,
+      "path": "midi/s02-chorus/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 124,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "7af5883a64a350a53dd825900104060a7b2d9d2663c349a743e48f03e4f652bd",
+      "tempo_us": 483871,
+      "tracks": 1
+    },
+    {
+      "bytes": 633,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 64,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 483871
+      },
+      "core": true,
+      "departures": 5,
+      "effective_bpm": 123.99999173333389,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 64,
+      "outside_collection": 5,
+      "path": "midi/s02-chorus/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 124,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "1f2dcaba62076512aee35dcb7fa68148ee19b0efa28a5a9f119971a019b7cc03",
+      "tempo_us": 483871,
+      "tracks": 1
+    },
+    {
+      "bytes": 196,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 16,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 483871
+      },
+      "core": false,
+      "departures": 2,
+      "effective_bpm": 123.99999173333389,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 16,
+      "outside_collection": 2,
+      "path": "midi/s02-chorus/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 124,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "ada6cd6848f9ff850d19a6f1c7cacbe8abdf97e824f133c840339be30dd3eeea",
+      "tempo_us": 483871,
+      "tracks": 1
+    },
+    {
+      "bytes": 281,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 24,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 454545
+      },
+      "core": true,
+      "departures": 2,
+      "effective_bpm": 132.000132000132,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 24,
+      "outside_collection": 2,
+      "path": "midi/s03-drop/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 132,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "7d744cde3e5b8457cfbb2e92fc9f7ef67f67805e114955ee084f32c7659a535b",
+      "tempo_us": 454545,
+      "tracks": 1
+    },
+    {
+      "bytes": 345,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 32,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 454545
+      },
+      "core": true,
+      "departures": 2,
+      "effective_bpm": 132.000132000132,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 32,
+      "outside_collection": 2,
+      "path": "midi/s03-drop/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 132,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "bd2c1aa5a707ca0bfdab6107d4d0c81016c67433269f66af3061699bbf790b68",
+      "tempo_us": 454545,
+      "tracks": 1
+    },
+    {
+      "bytes": 128,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 8,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 454545
+      },
+      "core": false,
+      "departures": 1,
+      "effective_bpm": 132.000132000132,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 8,
+      "outside_collection": 1,
+      "path": "midi/s03-drop/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 132,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "c09de97f50b8b827cc5c53099aee2a1ce31dbeae11312db42843a42369f62eb0",
+      "tempo_us": 454545,
+      "tracks": 1
+    },
+    {
+      "bytes": 201,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 16,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 625000
+      },
+      "core": true,
+      "departures": 0,
+      "effective_bpm": 96.0,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 16,
+      "path": "midi/s04-two-feel/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 96,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "88896f8c84c030fd99c2e5e8b1e31918afd50dfe3dc3fb83fadea8c7ac4f2d1a",
+      "tempo_us": 625000,
+      "tracks": 1
+    },
+    {
+      "bytes": 345,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 32,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 625000
+      },
+      "core": true,
+      "departures": 0,
+      "effective_bpm": 96.0,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 32,
+      "path": "midi/s04-two-feel/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 96,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "06c419300b3bd007448d8f1eebebe5004d0915aec7fac6cdeb0fe12e87b18bda",
+      "tempo_us": 625000,
+      "tracks": 1
+    },
+    {
+      "bytes": 128,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 8,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 625000
+      },
+      "core": false,
+      "departures": 0,
+      "effective_bpm": 96.0,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 8,
+      "path": "midi/s04-two-feel/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 96,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "d940fdbd3f163cd5ead96d9cb3b7820f77f1aebe863d5a7d1916d6f555784fde",
+      "tempo_us": 625000,
+      "tracks": 1
+    },
+    {
+      "bytes": 625,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 63,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 428571
+      },
+      "core": true,
+      "departures": 9,
+      "effective_bpm": 140.00014000014,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 63,
+      "outside_collection": 9,
+      "path": "midi/s05-pickup/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 140,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "dbf76ace3c9b79560594a48c8454b49aa5870eed011ed1360c6d8c5f0b90b101",
+      "tempo_us": 428571,
+      "tracks": 1
+    },
+    {
+      "bytes": 633,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 64,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 428571
+      },
+      "core": true,
+      "departures": 9,
+      "effective_bpm": 140.00014000014,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 64,
+      "outside_collection": 9,
+      "path": "midi/s05-pickup/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 140,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "2428a13ba65580f48e7e773d2fccbd7d273c70c3467f04060a8b6e9116ebdc3b",
+      "tempo_us": 428571,
+      "tracks": 1
+    },
+    {
+      "bytes": 332,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 32,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 428571
+      },
+      "core": false,
+      "departures": 2,
+      "effective_bpm": 140.00014000014,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 32,
+      "outside_collection": 2,
+      "path": "midi/s05-pickup/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 140,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "d2b786ec264b5215840334398e532fae561b6e84b8b5d1c5d8a4e205d623682e",
+      "tempo_us": 428571,
+      "tracks": 1
+    },
+    {
+      "bytes": 372,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 35,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 517241
+      },
+      "core": true,
+      "departures": 2,
+      "effective_bpm": 116.00008506672904,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 35,
+      "outside_collection": 2,
+      "path": "midi/s06-push/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 116,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "98480bb0cb1877669a1ce3e437ee8027b008b729cb696b76dec574f57994b8fe",
+      "tempo_us": 517241,
+      "tracks": 1
+    },
+    {
+      "bytes": 345,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 32,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 517241
+      },
+      "core": true,
+      "departures": 2,
+      "effective_bpm": 116.00008506672904,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 32,
+      "outside_collection": 2,
+      "path": "midi/s06-push/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 116,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "7999a502c3adb03285c7e4fb0e358fce37a533715ae2521d362be88f1390332d",
+      "tempo_us": 517241,
+      "tracks": 1
+    },
+    {
+      "bytes": 128,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 8,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 517241
+      },
+      "core": false,
+      "departures": 2,
+      "effective_bpm": 116.00008506672904,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 8,
+      "outside_collection": 2,
+      "path": "midi/s06-push/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 116,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "92a30894296eb100b734ea90c2753644c1b74fe49416b9ac3b951d33773543a8",
+      "tempo_us": 517241,
+      "tracks": 1
+    },
+    {
+      "bytes": 273,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 24,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 600000
+      },
+      "core": true,
+      "departures": 0,
+      "effective_bpm": 100.0,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 24,
+      "path": "midi/s07-cadence/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 100,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "89a5f349b479b347d3e5b9bcaa9495f0248c5ee85ebaddbba4f031eca9263d07",
+      "tempo_us": 600000,
+      "tracks": 1
+    },
+    {
+      "bytes": 345,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 32,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 600000
+      },
+      "core": true,
+      "departures": 1,
+      "effective_bpm": 100.0,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 32,
+      "outside_collection": 1,
+      "path": "midi/s07-cadence/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 100,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "5ddf36bf648ba05a7feb23d5ee7ab34e618f32391c0d1a31741d5e1124043eb1",
+      "tempo_us": 600000,
+      "tracks": 1
+    },
+    {
+      "bytes": 145,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 30720,
+        "meter": "4/4",
+        "notes": 10,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 600000
+      },
+      "core": false,
+      "departures": 0,
+      "effective_bpm": 100.0,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 10,
+      "path": "midi/s07-cadence/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 100,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "972d548aca9166ca877980d7341098358a1850b0bf3ba2c2e8ff52922dff140f",
+      "tempo_us": 600000,
+      "tracks": 1
+    },
+    {
+      "bytes": 609,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 61,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 405405
+      },
+      "core": true,
+      "departures": 2,
+      "effective_bpm": 148.000148000148,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 61,
+      "outside_collection": 2,
+      "path": "midi/s08-breather/walk-a.mid",
+      "ppq": 960,
+      "requested_bpm": 148,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "0c817809508050a23200b3239ba44728dc4b777754fa671185ad4f23239acea6",
+      "tempo_us": 405405,
+      "tracks": 1
+    },
+    {
+      "bytes": 633,
+      "channels": [
+        0
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 64,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 405405
+      },
+      "core": true,
+      "departures": 6,
+      "effective_bpm": 148.000148000148,
+      "format": 0,
+      "max_polyphony": 1,
+      "meter": "4/4",
+      "notes": 64,
+      "outside_collection": 6,
+      "path": "midi/s08-breather/walk-b.mid",
+      "ppq": 960,
+      "requested_bpm": 148,
+      "role": "walking-bass",
+      "score_agreement": "PASS",
+      "sha256": "0389b20f009da20f7dc553dad58c000360f8d0462bf4e8f46d73e114dd0aace3",
+      "tempo_us": 405405,
+      "tracks": 1
+    },
+    {
+      "bytes": 196,
+      "channels": [
+        1
+      ],
+      "checks": {
+        "eot": 61440,
+        "meter": "4/4",
+        "notes": 16,
+        "overlap": "PASS",
+        "parse": "PASS",
+        "ppq": 960,
+        "tempo": 405405
+      },
+      "core": false,
+      "departures": 2,
+      "effective_bpm": 148.000148000148,
+      "format": 0,
+      "max_polyphony": 2,
+      "meter": "4/4",
+      "notes": 16,
+      "outside_collection": 2,
+      "path": "midi/s08-breather/chords.mid",
+      "ppq": 960,
+      "requested_bpm": 148,
+      "role": "chord-reference",
+      "score_agreement": "PASS",
+      "sha256": "4e2a30105be873ea78aa5a1fda25c3be2142699fe9bec3ebc8808ab610753350",
+      "tempo_us": 405405,
+      "tracks": 1
+    }
+  ],
+  "generator_version": "1.0.0",
+  "identity_check": {
+    "method": "bass variations differ; variation A attack times are not shared",
+    "studies": [
+      {
+        "a": 32,
+        "b": 32,
+        "study_id": "s01"
+      },
+      {
+        "a": 64,
+        "b": 64,
+        "study_id": "s02"
+      },
+      {
+        "a": 24,
+        "b": 32,
+        "study_id": "s03"
+      },
+      {
+        "a": 16,
+        "b": 32,
+        "study_id": "s04"
+      },
+      {
+        "a": 63,
+        "b": 64,
+        "study_id": "s05"
+      },
+      {
+        "a": 35,
+        "b": 32,
+        "study_id": "s06"
+      },
+      {
+        "a": 24,
+        "b": 32,
+        "study_id": "s07"
+      },
+      {
+        "a": 61,
+        "b": 64,
+        "study_id": "s08"
+      }
+    ]
+  },
+  "listening": "No human listening audition was performed for this build.",
+  "negative_tests": {
+    "boundary_rejected_at_write": "PASS",
+    "monophonic_overlap_detected": "PASS"
+  },
+  "pack_id": "jazz-walking-basslines",
+  "percussion_map": {
+    "36": "Acoustic Bass Drum (GM), channel 10"
+  },
+  "repair_note": "No repairs were applied. This report is the first validation pass of the delivered bytes.",
+  "repairs": [],
+  "result": "PASS",
+  "rules": [
+    "file exists and parses",
+    "PPQ 960",
+    "encoded tempo and 4/4 meter",
+    "one end-of-track at the declared container",
+    "explicit note pairing",
+    "boundaries, velocity, range, monophonic bass, harmonic polyphony cap",
+    "percussion limited to GM note 36 on channel 10",
+    "note-offs precede note-ons that share a tick",
+    "no program changes or other channel messages",
+    "reopened notes match the canonical score",
+    "arrangement musical tracks match the individual files and carry no tempo"
+  ],
+  "score_path": "score/canonical-score-Cursor.json",
+  "score_sha256": "77044c83fe7afcdba20e34c609249e3a0f2f063ca5320ad3d0ffd2760c22f088",
+  "validator_version": "1.0.0"
+}
